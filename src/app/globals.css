@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,20 +9,42 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+button,
+input,
+textarea,
+select,
+option,
+a {
+  @apply outline-none outline-0;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply font-montserrat text-sm font-medium bg-white text-black overflow-x-hidden;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px !important;
+  color: white;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: white;
+}
+
+.swiper-pagination-bullet {
+    position: relative;
+    z-index: 1001;
 }

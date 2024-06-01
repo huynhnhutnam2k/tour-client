@@ -1,6 +1,7 @@
 export const API_URLS = {
   POST: {
     POSTS: "/posts",
+    SEARCH: '/search'
   },
   TYPE: {
     TYPES: "/types",

@@ -3,6 +3,9 @@ export const createLinkPost = (post) => {
 }
 
 export const calcDiscount = (post) => {
+    if(!post?.product?.discount?.config) {
+        return post?.product?.price
+    }
     const isPercent = post.product.discount?.config?.[0]?.style === 'percent'
     let discount
     if(isPercent) {

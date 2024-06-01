@@ -26,6 +26,23 @@ body {
   @apply font-montserrat text-sm font-medium bg-white text-black overflow-x-hidden;
 }
 
+@layer components {
+    .btn {
+        @apply w-10 h-10 flex justify-center items-center bg-white rounded-lg absolute top-1/2 -translate-y-1/2 cursor-pointer;
+    }
+
+    .btn.left {
+        @apply left-20;
+    }
+    .btn.right { 
+        @apply right-20;
+    }
+
+    .container {
+        @apply px-3 md:px-5 lg:px-20;
+    }
+}
+
 .swiper-button-next,
 .swiper-button-prev {
   width: 40px !important;

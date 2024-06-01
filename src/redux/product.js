@@ -4,11 +4,15 @@ const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 export const fetchProductsList = createAsyncThunk(
   "product/fetchList",
-  async (categories, type_id = 1) => {
+  async (payload) => {
+    const { type_id, categories, orderBy } = payload
     const response = await postApi.client.getAllPosts({
-      type_id: type_id,
+      query: {
+        type_id: type_id,
+        cat: categories.join(", "),
+        orderBy
+      },
       include: "categories,type",
-      //   categories: categories,
     });
     return response.data;
   }
@@ -16,7 +20,7 @@ export const fetchProductsList = createAsyncThunk(
 
 export const fetchProductDetail = createAsyncThunk(
   "product/detail",
-  async (id, include = 'type,categories') => {
+  async (id, include = "type,categories") => {
     const response = await postApi.server.getPostById({
       id,
       include,
@@ -28,6 +32,7 @@ export const fetchProductDetail = createAsyncThunk(
 
 const initialState = {
   isLoading: false,
+  categories: [],
   products: [],
   isLoadingDetail: false,
   product: {},
@@ -37,7 +42,21 @@ const initialState = {
 const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    handleToggleCategory: (state, action) => {
+      let cate = [...state.categories];
+      if (cate.includes(action.payload)) {
+        cate = cate.filter((item) => item !== action.payload);
+      } else {
+        cate.push(action.payload);
+      }
+
+      return {
+        ...state,
+        categories: cate,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductsList.pending, (state) => {
@@ -57,4 +76,5 @@ const productSlice = createSlice({
   },
 });
 
+export const { handleToggleCategory } = productSlice.actions;
 export default productSlice.reducer;

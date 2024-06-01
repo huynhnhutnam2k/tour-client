@@ -9,7 +9,12 @@ module.exports = {
   theme: {
     container: {
       center: true, // Centers the container
-      padding: "80px", // Sets horizontal padding
+      padding: {
+        sm: "15px", // 100% width on small screens
+        md: "15px", // 100% width on medium screens
+        lg: "80px", // Max width on large screens
+        xl: "80px", // Max width on extra large screens
+      },
       screens: {
         sm: "100%", // 100% width on small screens
         md: "100%", // 100% width on medium screens
@@ -27,13 +32,14 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "gradient-flash-sale":
           "radial-gradient(circle 597px at 93% 9.8%, #ff3d59 1.7%, #fcfb2c 97%);",
+        "gradient-form": "linear-gradient(to top, #fff1eb 0, #ace0f9 100%);",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
       },
       colors: {
         gray: {
-            primary: "#e8e8e8"
+          primary: "#e8e8e8",
         },
         blue: {
           primary: "#e4f7ff",

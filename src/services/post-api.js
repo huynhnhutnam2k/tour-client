@@ -4,7 +4,7 @@ import { axiosClient, axiosServer } from "./httpConfig";
 export const postApi = {
   client: {
     getAllPosts({ query, include }) {
-      return axiosClient.get(API_URLS.POST.POSTS, {
+      return axiosClient.get(API_URLS.POST.SEARCH, {
         params: {
           ...query,
           include,

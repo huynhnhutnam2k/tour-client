@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import Head from "next/head";
+import NextTopLoader from "nextjs-toploader";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import "./globals.css";
 import { MainLayout } from "@/layouts";
@@ -17,15 +19,14 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const locale = (await getLocale()) || "vi";
+  const locale = (await getLocale()) || { value: "vi" };
   const setting = await settingApi.getSetting(locale);
-
   const store = {
     locale,
     setting,
   };
   return (
-    <html lang="en">
+    <html lang='vi'>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -40,6 +41,7 @@ export default async function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
       <body>
+        <NextTopLoader color="#2154a3" />
         <ReduxProvider data={store}>
           <MainLayout>{children}</MainLayout>
         </ReduxProvider>

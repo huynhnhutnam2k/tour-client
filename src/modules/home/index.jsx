@@ -1,11 +1,16 @@
 import ProductList from "@/components/product/ProductList"
 import Banner from "./Banner"
+import { widgetApi } from "@/services"
 
-const HomeModules = () => {
+const HomeModules = async () => {
+    const bannerData = await widgetApi.server.getWidgetInfo({
+        key: 'banner'
+    })
+
   return (
     <div>
-        <Banner />
-        <ProductList />
+        <Banner data={bannerData?.banner?.data?.field}/>
+        <ProductList isFilter/>
     </div>
   )
 }

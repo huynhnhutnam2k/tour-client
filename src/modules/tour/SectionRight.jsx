@@ -14,16 +14,15 @@ const SectionRight = () => {
       phone: "",
     },
     validationSchema: yup.object({
-      name: yup.string().required(trans("form.label.name.error")),
-      phone: yup.string().required(trans("form.label.phone.error")),
+      name: yup.string().required("Vui lòng nhập tên"),
+      phone: yup.string().required("Vui lòng nhập số điện thoại"),
     }),
-    onSubmit: (values) => {
-    },
+    onSubmit: (values) => {},
   });
   return (
     <div className="w-full lg:w-3/12">
-      <div className="p-4 bg-gradient-form rounded-md sticky top-20">
-        <h3 className="uppercase text-center text-lg">
+      <div className="p-4 bg-gradient-form rounded-md sticky top-20 z-[1005]">
+        <h3 className="uppercase text-center text-[22px] font-medium leading-[1.8]">
           KIỂM TRA LỊCH TRỐNG & BÁO GIÁ
         </h3>
         <InputCustom
@@ -31,8 +30,8 @@ const SectionRight = () => {
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.name}
-          label={trans("form.label.name")}
-          placeholder={trans("form.label.placeholder")}
+          label="Họ và tên"
+          placeholder="Nhập họ tên"
           isError={touched.name && errors.name}
           errorMsg={errors.name}
           otherStyle="mt-3 mb-4"
@@ -42,14 +41,19 @@ const SectionRight = () => {
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.phone}
-          label={trans("form.label.phone")}
-          placeholder={trans("form.label.placeholder")}
+          label="Điện thoại"
+          placeholder="Nhập điện thoại"
           isError={touched.phone && errors.phone}
           errorMsg={errors.phone}
           otherStyle="mb-4"
         />
 
-        <ButtonCustom title="Gửi thông tin" otherStyle="!p-4 uppercase mx-auto" />
+        <div
+          className="p-4 bg-[#fcd079] text-black flex justify-center
+         items-center mx-auto text-[18px] cursor-pointer w-fit rounded uppercase duration-150 hover:shadow-booking hover:opacity-80"
+        >
+          Gửi thông tin
+        </div>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const Top = ({ data }) => {
   return (
     <div className="overflow-x-hidden">
       <div className="hidden lg:flex gap-x-[10px] py-4">
-        <div className="relative w-1/2 aspect-[665/435] rounded-tl-xl rounded-bl-xl overflow-hidden">
+        <div className="relative w-1/2 aspect-[665/435] rounded-tl-xl rounded-bl-xl overflow-hidden" onClick={() => setIsOpenLightbox(true)}>
           <ImgCustom
             src={data.image}
             width={665}
@@ -33,10 +33,11 @@ const Top = ({ data }) => {
         </div>
         <div className="w-1/2 aspect-[665/435] rounded-tr-xl rounded-br-xl overflow-hidden">
           <div className="grid grid-cols-2 grid-rows-2 gap-[10px]">
-            {data.media.slice(0, 4).map((item, index) => (
+            {data.media?.slice(0, 4).map((item, index) => (
               <div
                 className="w-full aspect-[327/212] overflow-hidden"
                 key={index}
+                onClick={() => setIsOpenLightbox(true)}
               >
                 <ImgCustom
                   src={item}
@@ -51,7 +52,7 @@ const Top = ({ data }) => {
         </div>
       </div>
       <div className="w-full flex lg:hidden overflow-x-auto mt-3">
-        {data.media.map((item, index) => (
+        {data.media?.map((item, index) => (
           <div className="w-full min-w-full aspect-[350/227]" key={index}>
             <ImgCustom
               src={item}
@@ -69,15 +70,15 @@ const Top = ({ data }) => {
           <div className="flex flex-col lg:items-end">
             <div className="flex gap-x-1 items-center">
               <p>
-                <b className="text-red-500 text-[22px] ">
-                  {parseCurrency(calcDiscount(data))}
+                <b className="text-red-500 font-medium text-[26px] ">
+                  {parseCurrency(calcDiscount(data)).replace('VND','₫')}
                 </b>
                 /đêm
               </p>
             </div>
             {data?.product?.discount?.id ? (
               <div className="line-through">
-                {parseCurrency(data.product.price)}
+                {parseCurrency(data.product.price).replace('VND', '₫')}
               </div>
             ) : null}
           </div>
@@ -87,25 +88,25 @@ const Top = ({ data }) => {
           {data?.meta?.area ? (
             <div className="flex items-center gap-x-1">
               <ImgCustom src={Acreage} width={22} height={22} className="" />
-              <p>{data.meta.area} m2</p>
+              <p className="text-[15px]">{data.meta.area} m2</p>
             </div>
           ) : null}
           {data?.meta?.bed ? (
             <div className="flex items-center gap-x-1">
               <ImgCustom src={Bedroom} width={22} height={22} className="" />
-              <p>{data.meta.bed} ngủ</p>
+              <p className="text-[15px]">{data.meta.bed} ngủ</p>
             </div>
           ) : null}
           {data?.meta?.toilet ? (
             <div className="flex items-center gap-x-1">
               <ImgCustom src={Toilet} width={22} height={22} className="" />
-              <p>{data.meta.toilet} wc</p>
+              <p className="text-[15px]">{data.meta.toilet} wc</p>
             </div>
           ) : null}
           {data?.meta?.number ? (
             <div className="flex items-center gap-x-1">
               <ImgCustom src={People} width={22} height={22} className="" />
-              <p>{data.meta.number} m2</p>
+              <p className="text-[15px]">{data.meta.number} khách</p>
             </div>
           ) : null}
         </div>

@@ -44,9 +44,9 @@ const ProductList = ({ isFilter = false }) => {
 
   return (
     <section className="product-list">
-      <div className="container px-0">
+      <div className="container px-0 lg:px-20">
         {isFilter ? (
-          <div className="flex justify-end gap-x-5 mt-5">
+          <div className="flex justify-end gap-x-5 mt-5 mr-4 sm:mr-0">
             {orderByList.map((item, index) => (
               <div className="flex items-center gap-x-2" key={index}>
                 <input
@@ -54,13 +54,14 @@ const ProductList = ({ isFilter = false }) => {
                   name={item.title}
                   checked={item.id === orderBy?.id}
                   onChange={() => setOrderBy(item)}
+                  className="w-5 h-5"
                 />
-                <label htmlFor={item.title}>{item.title}</label>
+                <label htmlFor={item.title} className="text-[15px] font-normal">{item.title}</label>
               </div>
             ))}
           </div>
         ) : null}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {products?.map((product, index) => (
             <ProductItem product={product} isLoading={isLoading} key={index} />
           ))}

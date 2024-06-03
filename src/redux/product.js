@@ -12,7 +12,7 @@ export const fetchProductsList = createAsyncThunk(
         cat: categories.join(", "),
         orderBy
       },
-      include: "categories,type",
+      include: "categories,type,trademark",
     });
     return response.data;
   }
@@ -36,6 +36,8 @@ const initialState = {
   products: [],
   isLoadingDetail: false,
   product: {},
+  isQuickView: false,
+  quickViewData: {},
   error: {},
 };
 
@@ -56,6 +58,13 @@ const productSlice = createSlice({
         categories: cate,
       };
     },
+    setIsQuickView: (state, action) => {
+        return {
+            ...state, 
+            isQuickView: action.payload.isQuickView, 
+            quickViewData: action.payload.quickViewData
+        }
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -76,5 +85,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { handleToggleCategory } = productSlice.actions;
+export const { handleToggleCategory, setIsQuickView } = productSlice.actions;
 export default productSlice.reducer;

@@ -7,7 +7,6 @@ import PrevArrowIcon from "@/assets/svg/PrevArrowIcon";
 
 export const SingleLightbox = ({
   thumb,
-  isMultiple = true,
   isOpen,
   setIsOpen,
 }) => {
@@ -25,13 +24,13 @@ export const SingleLightbox = ({
 
   return (
     <div
-      className={`fixed top-0 left-0 bottom-0 right-0 bg-black/70 ${
+      className={`fixed top-0 left-0 bottom-0 right-0 bg-black/90 z-[2000] ${
         isOpen ? "w-screen block" : "w-0 hidden"
       } h-screen`}
     >
-      <div className="flex justify-between items-center h-12 w-full bg-black/85 px-10">
+      <div className="flex justify-between items-center h-12 w-full px-10">
         <div className="text-white">
-          {photoIndex + 1}/{thumb.length - 1}
+          {photoIndex + 1}/{thumb?.length - 1}
         </div>
         <div
           className="w-10 h-10 flex justify-center items-center bg-black cursor-pointer"
@@ -45,7 +44,7 @@ export const SingleLightbox = ({
       </div>
 
       <div className="relative container h-[calc(100%-50px)] flex justify-center items-center overflow-hidden">
-        {thumb.map((item, index) => (
+        {thumb?.map((item, index) => (
           <ImgCustom
             src={item}
             width={1024}

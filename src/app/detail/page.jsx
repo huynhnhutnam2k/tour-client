@@ -11,7 +11,7 @@ const DetailPage = async ({ searchParams }) => {
 
   const postRes = await postApi.server.getPostById({
     id,
-    include: "type,categories",
+    include: "type,categories,trademark",
   });
 
   if (!postRes) {

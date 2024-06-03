@@ -13,7 +13,7 @@ const InputCustom = ({
 }) => {
   return (
     <div className={`flex flex-col ${otherStyle}`}>
-      <label htmlFor={name} className="mb-1">{label}</label>
+      <label htmlFor={name} className="mb-1 text-[17px]">{label}</label>
       <div className="">
         <input
             type={type}
@@ -22,7 +22,7 @@ const InputCustom = ({
             onChange={onChange}
             onBlur={onBlur}
             placeholder={placeholder}
-            className="h-full w-full border border-[#eee]  rounded-md p-4 text-base"
+            className="h-full w-full border border-[#eee]  rounded-md p-4 text-[17px]"
         />
       </div>
       {errorMsg && isError && <span className="text-red-500 font-bold">{errorMsg}</span>}

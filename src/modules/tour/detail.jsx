@@ -9,7 +9,7 @@ export const TourDetailModule = ({ data }) => {
       <div className="container">
         <Top data={data} />
       </div>
-      <div className="mt-[30px] py-[30px] bg-gray-primary">
+      <div className="mt-[30px] py-[30px] lg:bg-gray-primary">
         <div className="container">
           <div className="flex flex-col lg:flex-row gap-y-3 lg:gap-x-6">
             <SectionLeft data={data} />

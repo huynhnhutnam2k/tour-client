@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 
@@ -12,24 +14,27 @@ import Acreage from "@/assets/img/acreage.png";
 import Bedroom from "@/assets/img/bedroom.png";
 import Toilet from "@/assets/img/toilet.png";
 import People from "@/assets/img/people.png";
-import Skeleton from "react-loading-skeleton";
-import QuickView from "./QuickView";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setIsQuickView } from "@/redux/product";
 
 const ProductItem = ({ product, isLoading }) => {
-  const [isQuickView, setIsQuickView] = useState(false);
+  const dispatch = useDispatch();
   return (
-    <div className="w-full overflow-hidden">
-      <div className="w-full mt-[30px] px-3 lg:px-4 relative">
+    <div className="w-full">
+      <div className="w-full mt-[30px] px-3 lg:px-[12px] relative">
         {product?.product?.discount?.id ? (
-          <div className="absolute top-4 -left-[10px] px-4 py-1 text-center uppercase leading-[1.5] text-[17px] rounded bg-gradient-flash-sale text-white z-[1000]">
+          <div className="absolute top-4 left-0 px-4 py-1 text-center uppercase leading-[1.5] text-[17px] rounded bg-gradient-flash-sale text-white z-[1000]">
             Flash sale
+          </div>
+        ) : product?.trademark?.data?.slug === "moi" ? (
+          <div className="absolute top-4 left-0 px-4 py-1 text-center uppercase leading-[1.5] text-[17px] rounded bg-gradient-flash-sale text-white z-[1000]">
+            Mới
           </div>
         ) : null}
         <div className="img w-full aspect-square relative overflow-hidden rounded-lg">
           {product?.product?.discount?.id ? (
             <div className="absolute bottom-0 right-0 px-4 py-1 text-center uppercase leading-[1.5] text-[17px] bg-orange-600 rounded-br-lg text-white z-[1000] line-through shadow-oldPrice">
-              {parseCurrency(product?.product?.price, "")}
+              {parseCurrency(product?.product?.price, "").replace("VND", "đ")}
             </div>
           ) : null}
           {isLoading ? (
@@ -44,7 +49,7 @@ const ProductItem = ({ product, isLoading }) => {
             <Skeleton width="100%" height="40px" className="mt-[14px]" />
           ) : (
             <Link href={createLinkPost(product)}>
-              <h3 className="text-black hover:text-blue-secondary duration-200 mt-[14px] text-[18px] line-clamp-2">
+              <h3 className="text-[#333] hover:text-blue-secondary duration-200 mt-[14px] text-[18px] leading-[1.4] font-medium line-clamp-2">
                 {product.title}
               </h3>
             </Link>
@@ -52,7 +57,7 @@ const ProductItem = ({ product, isLoading }) => {
           {isLoading ? (
             <Skeleton width="100%" height="20px" className="mt-[14px]" />
           ) : (
-            <p className="text-blue-secondary mt-[14px]">
+            <p className="text-[#3e81ff] mt-[14px] text-[15px] leading-[1.5] font-medium truncate">
               {product.categories?.data
                 ?.map((category) => category.title)
                 ?.join(", ")}
@@ -65,14 +70,15 @@ const ProductItem = ({ product, isLoading }) => {
             <div className="flex justify-between items-center mt-[14px]">
               <div className="flex gap-x-1 items-center">
                 <p>
-                  <b className="text-red-500 text-[22px] ">
-                    {parseCurrency(calcDiscount(product))}
+                  <b className="text-[#ff0000] text-[22px] font-medium">
+                    {parseCurrency(calcDiscount(product)).replace("VND", "₫")}
                   </b>
                   /đêm
                 </p>
                 {product?.product?.discount?.id ? (
-                  <p className="rounded p-1 text-white bg-red-500">
-                    {product?.product.discount?.config?.[0]?.discount}{" "}
+                  <p className="rounded p-1 text-white bg-[#ff0000]">
+                    {"-"}
+                    {product?.product.discount?.config?.[0]?.discount}
                     {product?.product.discount?.config?.[0]?.style === "percent"
                       ? "%"
                       : "đ"}
@@ -83,7 +89,12 @@ const ProductItem = ({ product, isLoading }) => {
                 title="Xem nhanh"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsQuickView(true);
+                  dispatch(
+                    setIsQuickView({
+                      isQuickView: true,
+                      quickViewData: product,
+                    })
+                  );
                 }}
               />
             </div>
@@ -100,7 +111,7 @@ const ProductItem = ({ product, isLoading }) => {
                     height={22}
                     className=""
                   />
-                  <p>{product.meta.area} m2</p>
+                  <p className="text-[15px]">{product.meta.area} m2</p>
                 </div>
               ) : null}
               {product?.meta?.bed ? (
@@ -111,30 +122,25 @@ const ProductItem = ({ product, isLoading }) => {
                     height={22}
                     className=""
                   />
-                  <p>{product.meta.bed} ngủ</p>
+                  <p className="text-[15px]">{product.meta.bed} ngủ</p>
                 </div>
               ) : null}
               {product?.meta?.toilet ? (
                 <div className="flex items-center gap-x-1">
                   <ImgCustom src={Toilet} width={22} height={22} className="" />
-                  <p>{product.meta.toilet} wc</p>
+                  <p className="text-[15px]">{product.meta.toilet} wc</p>
                 </div>
               ) : null}
               {product?.meta?.number ? (
                 <div className="flex items-center gap-x-1">
                   <ImgCustom src={People} width={22} height={22} className="" />
-                  <p>{product.meta.number} m2</p>
+                  <p className="text-[15px]">{product.meta.number} khách</p>
                 </div>
               ) : null}
             </div>
           )}
         </div>
       </div>
-      <QuickView
-        product={product}
-        isShow={isQuickView}
-        setIsShow={setIsQuickView}
-      />
     </div>
   );
 };

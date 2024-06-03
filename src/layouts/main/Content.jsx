@@ -13,7 +13,7 @@ const Content = ({ categoriesRes, children }) => {
   );
   return (
     <div
-      className={`relative ${isQuickView ? "overflow-hidden h-screen" : ""}`}
+      className={`relative mb-[60px] md:mb-0 ${isQuickView ? "overflow-hidden h-screen" : ""}`}
     >
       <Header data={categoriesRes?.data} />
       {children}

@@ -5,7 +5,7 @@ import ZaloIcon from "@/assets/svg/ZaloIcon"
 
 const FooterAction = () => {
   return (
-    <div className="fixed bottom-0 left-0 w-screen h-[60px] bg-gray-primary z-[2000]">
+    <div className="fixed bottom-0 left-0 w-screen h-[60px] bg-gray-primary z-[2000] md:hidden">
         <div className="grid grid-cols-4 w-full h-full">
             <div className="flex items-center justify-center flex-col gap-y-1">
                 <PhoneIcon2 className="w-5 h-5"/>

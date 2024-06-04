@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ImgCustom } from "../common/imgCustom";
@@ -87,22 +87,30 @@ export const Header = ({ data }) => {
       </div>
 
       <div className="container flex flex-col lg:hidden !px-0 !overflow-y-hidden">
-        <Link href="/" className="ml-2">
-          <div className="w-[160px] h-[50px]">
-            <ImgCustom
-              src={settingData?.site_logo}
-              width={160}
-              height={50}
-              className="w-full h-full"
-            />
+        <div className="flex items-center justify-between">
+          <Link href="/" className="ml-2">
+            <div className="w-[160px] h-[50px]">
+              <ImgCustom
+                src={settingData?.site_logo}
+                width={160}
+                height={50}
+                className="w-full h-full"
+              />
+            </div>
+          </Link>
+          <div className="text-base text-[#5f8ac2] pr-2">
+            Hotline:{" "}
+            <span className="text-red-500 font-bold">
+              {settingData?.site_hotline || "097 222 0000"}
+            </span>
           </div>
-        </Link>
+        </div>
         <ul className="flex max-w-[900px] overflow-x-auto">
           {data.map((menuItem, menuIndex) => (
             <li
               key={menuIndex}
               className={`px-4 py-4 flex justify-center items-center cursor-pointer text-[17px] uppercase hover:text-white duration-200 hover:bg-blue-secondary whitespace-nowrap bg-blue-secondary text-white ${
-                categories.includes(menuItem?.id) ? "bg-[#00296b]" : ""
+                categories.includes(menuItem?.id) ? "!bg-[#00296b]" : ""
               }`}
               onClick={() => handleClick(menuItem?.id)}
             >

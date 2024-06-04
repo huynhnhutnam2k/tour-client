@@ -1,9 +1,7 @@
 import PhoneIcon from "@/assets/svg/PhoneIcon";
-import Link from "next/link";
-
 const ButtonPhone = () => {
   return (
-    <div className="fixed bottom-5 left-10 hidden md:block">
+    <div className="fixed bottom-5 left-10 hidden md:block z-[2000]">
       <a href={`tel:0949115014`}>
         <div className="button-phone">
           <div className="button-phone-children">

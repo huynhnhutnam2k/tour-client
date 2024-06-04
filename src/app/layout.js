@@ -6,12 +6,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "react-loading-skeleton/dist/skeleton.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./globals.css";
 import { MainLayout } from "@/layouts";
 import { ReduxProvider } from "@/redux/provider";
 import { settingApi } from "@/services";
 import { getLocale } from "@/helpers/utils/server";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "Create Next App",
@@ -26,7 +28,7 @@ export default async function RootLayout({ children }) {
     setting,
   };
   return (
-    <html lang='vi'>
+    <html lang="vi">
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -43,7 +45,21 @@ export default async function RootLayout({ children }) {
       <body>
         <NextTopLoader color="#2154a3" />
         <ReduxProvider data={store}>
-          <MainLayout>{children}</MainLayout>
+          <MainLayout>
+            {children}
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+          </MainLayout>
         </ReduxProvider>
       </body>
     </html>

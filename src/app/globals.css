@@ -78,16 +78,27 @@ body {
 }
 
 .button-phone-children::before {
-    animation: pulse 2s ease-out infinite;
+  animation: pulse 2s ease-out infinite;
 }
 
 .button-phone-children::after {
-    animation: pulse 2s 1s ease-out infinite;
+  animation: pulse 2s 1s ease-out infinite;
 }
 
 @keyframes pulse {
-    100% {
-        transform: scale(4.5);
-        opacity: 0;
-    }
+  100% {
+    transform: scale(4.5);
+    opacity: 0;
+  }
+}
+
+.Toastify__toast {
+  @apply font-inter;
+  @media (max-width: 768px) {
+    min-height: unset;
+    padding: 5px;
+  }
+}
+.Toastify__toast-container {
+  @apply z-[9999999999];
 }

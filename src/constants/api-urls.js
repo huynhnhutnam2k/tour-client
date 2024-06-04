@@ -23,4 +23,10 @@ export const API_URLS = {
   CATEGORY: {
     CATEGORIES: "/categories",
   },
+  ORDER: {
+    ORDER: "/orders",
+  },
+  FEEDBACK: {
+    FEEDBACK: "/feedback",
+  }
 };

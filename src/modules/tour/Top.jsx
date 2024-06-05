@@ -14,7 +14,7 @@ import { SingleLightbox } from "@/components/common/singleLightbox";
 const Top = ({ data }) => {
   const [isOpenLightbox, setIsOpenLightbox] = useState(false);
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden ">
       <div className="hidden lg:flex gap-x-[10px] py-4">
         <div className="relative w-1/2 aspect-[665/435] rounded-tl-xl rounded-bl-xl overflow-hidden" onClick={() => setIsOpenLightbox(true)}>
           <ImgCustom

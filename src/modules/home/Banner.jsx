@@ -46,8 +46,8 @@ const Banner = ({ data }) => {
         background: `url(${data?.find((item) => item.key === "img")?.value})`,
       }}
     >
-      <div className="container h-full py-[200px] px-0 lg:px-20">
-        <div className="relative lg:min-w-[450px] w-full p-6 max-w-[500px] rounded-md before:absolute before:content-[''] before:top-0 before:left-0 before:right-0 before:bottom-0 before:bg-white/70 before:border-white/50 before:backdrop-blur-[2px] before:rounded-md">
+      <div className="container h-full py-[200px] !px-0 lg:!px-20 lg:!max-w-[1500px]">
+        <div className="relative lg:min-w-[450px] w-full p-6 md:max-w-[500px] rounded-md before:absolute before:content-[''] before:top-0 before:left-0 before:right-0 before:bottom-0 before:bg-[#EAEAEA] before:lg:bg-white/70 before:border-white/50 before:backdrop-blur-[2px] before:rounded-md">
           <div className="relative z-[3]">
             <h3 className="text-[32px] font-semibold text-center leading-[1.2] mb-4">
               {data?.find((item) => item.key === "title")?.value}

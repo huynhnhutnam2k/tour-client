@@ -5,8 +5,8 @@ const nextConfig = {
     remotePatterns: [{ hostname: "**" }],
   },
   env: {
-    NEXT_PUBLIC_API: "https://airbnbnova-api.satek.vn/v1",
-    NEXT_PUBLIC_API_DOCS: "https://airbnbnova-api.satek.vn/docs",
+    NEXT_PUBLIC_API: "https://api.giathanhtravel.com/v1",
+    NEXT_PUBLIC_API_DOCS: "https://api.giathanhtravel.com/docs",
     NEXT_PUBLIC_DOMAIN: "https://muathuocsi.vn",
     NEXT_PUBLIC_API_PROXY: "/api",
     NEXT_PUBLIC_LOCALE_DEFAULT: "vi",

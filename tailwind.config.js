@@ -26,9 +26,9 @@ module.exports = {
     extend: {
       boxShadow: {
         oldPrice: "0 0 40px 8px #fff",
-        phone: "0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)", 
-        booking: '0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)', 
-        social: '0 0 5px 2px rgba(255,255,255,.5)'
+        phone: "0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)",
+        booking: "0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)",
+        social: "0 0 5px 2px rgba(255,255,255,.5)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -37,20 +37,26 @@ module.exports = {
         "gradient-flash-sale":
           "radial-gradient(circle 597px at 93% 9.8%, #ff3d59 1.7%, #fcfb2c 97%);",
         "gradient-form": "linear-gradient(to top, #fff1eb 0, #ace0f9 100%);",
-        "gradient-phone": "radial-gradient(circle farthest-corner at 10% 20%,#0eae57 0,#0c7475 90%);"
+        "gradient-phone":
+          "radial-gradient(circle farthest-corner at 10% 20%,#0eae57 0,#0c7475 90%);",
       },
       animation: {
-        ping2: 'ping2 1s ease-in-out infinite',
+        ping2: "ping2 1s ease-in-out infinite",
+        pulse2: "pulse2 1s infinite",
       },
       keyframes: {
         ping2: {
-          '0%': { width: '0px', height: '0px' },
-          '90%': { width: '60px', height: '60px' },
-        }
+          "0%": { width: "0px", height: "0px" },
+          "90%": { width: "60px", height: "60px" },
+        },
+        pulse2: {
+          "0%": { boxShadow: "0 0 0 0 #1b4585" },
+          "100%": { boxShadow: "0 0 0 20px rgba(0,0,0,0)" },
+        },
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
-        inter: ["Inter", "sans-serif"]
+        inter: ["Inter", "sans-serif"],
       },
       colors: {
         gray: {

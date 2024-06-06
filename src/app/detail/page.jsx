@@ -7,15 +7,26 @@ import { postApi, seoApi } from "@/services";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata() {
-    const headers = nextHeader();
-    const locale = await getLocale();
-    const dataSeo = await seoApi.server.getSeoInfo({
-      url: headers.get("x-pathname"),
-      locale,
-    });
-    return generateMeta(dataSeo?.data?.seo, dataSeo?.data?.setting);
-  }
+export async function generateMetadata({ searchParams}) {
+  const headers = nextHeader();
+  const locale = await getLocale();
+  const dataSeo = await seoApi.server.getSeoInfo({
+    url: headers.get("x-pathname"),
+    locale,
+  });
+  const { tour } = searchParams;
+  const id = tour.split("-").at(-1);
+  const postRes = await postApi.server.getPostById({
+    id,
+    include: "type,categories,trademark",
+  });
+
+  return generateMeta(
+    dataSeo?.data?.seo,
+    dataSeo?.data?.setting,
+    postRes?.data
+  );
+}
 
 const DetailPage = async ({ searchParams }) => {
   const { tour } = searchParams;
@@ -36,7 +47,7 @@ const DetailPage = async ({ searchParams }) => {
     }
   };
   const Module = renderPage();
-  return <>{Module && <Module data={postRes.data}/>}</>;
+  return <>{Module && <Module data={postRes.data} />}</>;
 };
 
 DetailPage.Layout = MainLayout;

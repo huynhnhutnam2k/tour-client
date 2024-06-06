@@ -17,6 +17,7 @@ export async function getLocale() {
 }
 
 export function generateMeta(seo, setting, data = null) {
+    console.log(setting)
     const headers = nextHeader();
     const url = headers.get("x-url");
     

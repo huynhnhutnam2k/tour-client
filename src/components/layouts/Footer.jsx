@@ -1,7 +1,24 @@
 import { CheckIcon } from "@/assets/svg";
 import AccordionCustom from "../common/accordionCustom";
+import { handleToggleCategory } from "@/redux/product";
+import { useDispatch } from "react-redux";
+import { usePathname, useRouter } from "next/navigation";
 
 export const Footer = ({ data, copyRight, layoutWidget, phone, email }) => {
+    const dispatch = useDispatch();
+    const pathname = usePathname();
+    const router = useRouter();
+    const handleClick = (id) => {
+        dispatch(handleToggleCategory(id));
+        window.scrollTo({
+            top: 0, 
+            left: 0, 
+            behavior: 'smooth'
+        })
+        if (pathname !== "/") {
+          router.push("/");
+        }
+      };
   return (
     <footer className="mt-10">
       <div className="bg-blue-secondary py-[35px] hidden lg:block">
@@ -23,6 +40,7 @@ export const Footer = ({ data, copyRight, layoutWidget, phone, email }) => {
                 <li
                   key={index}
                   className="flex items-center gap-x-2 cursor-pointer mb-1"
+                  onClick={() => handleClick(item?.id)}
                 >
                   <CheckIcon className="w-6 h-6" />
                   <p className="text-base text-white">{item.title}</p>
@@ -59,6 +77,7 @@ export const Footer = ({ data, copyRight, layoutWidget, phone, email }) => {
               <li
                 key={index}
                 className="flex items-center gap-x-2 cursor-pointer mb-1"
+                onClick={() => handleClick(item?.id)}
               >
                 <CheckIcon className="w-6 h-6" />
                 <p className="text-base text-white">{item.title}</p>

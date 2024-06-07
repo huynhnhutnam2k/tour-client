@@ -24,11 +24,13 @@ export function ImgCustom({
   function handleLoadingComplete() {
     setLoading(false);
   }
-
+  if (!src) {
+    return null
+  }
   return (
     <>
       <Image
-        src={src || ''}
+        src={src}
         width={width}
         height={height}
         alt={alt}

@@ -1,9 +1,11 @@
 "use client";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchProductsList } from "@/redux/product";
-import ProductItem from "./ProductItem";
+
+const ProductItem = dynamic(() => import('./ProductItem'))
 
 const orderByList = [
   {

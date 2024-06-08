@@ -1,7 +1,10 @@
+import dynamic from "next/dynamic";
 import { headers as nextHeader } from "next/headers";
-import { generateMeta, getLocale } from "@/helpers/utils/server";
-import HomeModules from "@/modules/home";
+
 import { seoApi } from "@/services";
+import { generateMeta, getLocale } from "@/helpers/utils/server";
+
+const HomeModules = dynamic(() => import('@/modules/home'))
 
 export async function generateMetadata() {
   const headers = nextHeader();

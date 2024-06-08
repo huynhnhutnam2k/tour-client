@@ -29,6 +29,7 @@ module.exports = {
         phone: "0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)",
         booking: "0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)",
         social: "0 0 5px 2px rgba(255,255,255,.5)",
+        backLink: '2px 2px 4px 0px #00000033'
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

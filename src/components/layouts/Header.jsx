@@ -2,13 +2,13 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { ImgCustom } from "../common/imgCustom";
 
 import { useDetectDevice } from "@/helpers/hooks";
 import { handleToggleCategory } from "@/redux/product";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 export const Header = ({ data }) => {
   const pathname = usePathname();

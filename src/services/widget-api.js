@@ -1,4 +1,4 @@
-import { axiosServer } from "./httpConfig";
+import { axiosClient, axiosServer } from "./httpConfig";
 import { API_URLS } from "@/constants";
 
 export const widgetApi = {

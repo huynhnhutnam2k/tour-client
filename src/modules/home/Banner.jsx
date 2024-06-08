@@ -1,43 +1,59 @@
 "use client";
-
-import InputCustom from "@/components/form/input";
-import { feedbackApi } from "@/services";
-import { orderApi } from "@/services/order-api";
+import * as yup from "yup";
+import dynamic from "next/dynamic";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import * as yup from "yup";
+
+import { feedbackApi } from "@/services";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+const InputCustom = dynamic(() => import("@/components/form/input"));
 
 const Banner = ({ data }) => {
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit, resetForm } =
-    useFormik({
-      initialValues: {
-        name: "",
-        phone: "",
-      },
-      validationSchema: yup.object({
-        name: yup.string().required("Vui lòng nhập họ và tên"),
-        phone: yup.string().required("Vui lòng nhập số điện thoại"),
-      }),
-      onSubmit: async (values) => {
-        try {
-          const payload = {
-            type: "Thông tin",
-            name: values.name,
-            phone: values.phone,
-          };
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    resetForm,
+  } = useFormik({
+    initialValues: {
+      name: "",
+      phone: "",
+    },
+    validationSchema: yup.object({
+      name: yup.string().required("Vui lòng nhập họ và tên"),
+      phone: yup.string().required("Vui lòng nhập số điện thoại"),
+    }),
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        const payload = {
+          type: "Thông tin",
+          name: values.name,
+          phone: values.phone,
+        };
 
-          await feedbackApi.client.createFeedback(payload);
-          toast.success("Cảm ơn chúng tôi đã nhận được thông tin", {
-            position: "top-right",
-          });
-          resetForm()
-        } catch {
-          toast.error("Gởi thông tin thất bại", {
-            position: "top-right",
-          });
-        }
-      },
-    });
+        await feedbackApi.client.createFeedback(payload);
+        toast.success("Cảm ơn chúng tôi đã nhận được thông tin", {
+          position: "top-right",
+        });
+        resetForm();
+        setIsLoading(false);
+        router.push("/thanks");
+      } catch {
+        setIsLoading(false);
+        toast.error("Gởi thông tin thất bại", {
+          position: "top-right",
+        });
+      }
+    },
+  });
 
   return (
     <section
@@ -84,11 +100,15 @@ const Banner = ({ data }) => {
               />
 
               <button
-                className="text-[17px] border-2 border-white  bg-[#6e787a] px-5 py-4 flex justify-center items-center mx-auto text-white transition-all rounded-full hover:rounded-md"
+                className="text-[17px] border-2 border-white bg-[#6e787a] px-5 py-4 flex justify-center items-center mx-auto text-white transition-all rounded-full hover:rounded-md min-w-[150px]"
                 type="submit"
                 onClick={handleSubmit}
               >
-                Gửi thông tin
+                {isLoading ? (
+                  <div className="w-5 h-5 border-4 border-white border-r-[transparent] rounded-full animate-spin"></div>
+                ) : (
+                  <span>Gửi thông tin</span>
+                )}
               </button>
             </div>
           </div>

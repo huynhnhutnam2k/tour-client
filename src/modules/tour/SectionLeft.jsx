@@ -1,8 +1,13 @@
-import { ImgCustom } from "@/components/common/imgCustom";
+"use client";
 
-const SectionLeft = ({ data, setIsShowModalFeedback }) => {
+import { ImgCustom } from "@/components/common/imgCustom";
+const SectionLeft = ({ data, setIsShowModalFeedback,handleClickImg }) => {
   return (
-    <div className="w-full lg:w-9/12 bg-white rounded-md lg:p-4 overflow-hidden text-[17px] leading-[1.6]">
+    <div
+      className="w-full lg:w-9/12 bg-white rounded-md lg:p-4 overflow-hidden text-[17px] leading-[1.6]"
+      id="tour-left"
+      onClick={handleClickImg}
+    >
       {data?.content ? (
         <div
           className=""
@@ -12,7 +17,7 @@ const SectionLeft = ({ data, setIsShowModalFeedback }) => {
         ></div>
       ) : null}
       {data.sections?.data?.map((item, index) => (
-        <>
+        <div className="" key={index}>
           {!data?.content ? (
             index === 0 ? null : (
               <div
@@ -57,8 +62,9 @@ const SectionLeft = ({ data, setIsShowModalFeedback }) => {
               dangerouslySetInnerHTML={{ __html: item.content || "" }}
             ></div>
           ) : null}
-        </>
+        </div>
       ))}
+      
     </div>
   );
 };

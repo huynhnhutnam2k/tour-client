@@ -1,22 +1,30 @@
 "use client";
 
 import CancelIcon from "@/assets/svg/CancelIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImgCustom } from "./imgCustom";
 import PrevArrowIcon from "@/assets/svg/PrevArrowIcon";
 
-export const SingleLightbox = ({
-  thumb,
-  isOpen,
-  setIsOpen,
-}) => {
-  const [photoIndex, setPhotoIndex] = useState(0);
+export const SingleLightbox = ({ defaultImg, thumb, isOpen, setIsOpen }) => {
+  const [photoIndex, setPhotoIndex] = useState();
+
+  useEffect(() => {
+    if (defaultImg) {
+      const index = thumb.findIndex((item) => {
+        return item === defaultImg;
+      });
+
+      setPhotoIndex(index);
+    } else {
+      setPhotoIndex(0);
+    }
+  }, [defaultImg, thumb]);
 
   const handleChange = (state) => {
     setPhotoIndex(
       photoIndex + state < 0
         ? thumb.length - 1
-        : photoIndex + state > thumb.length - 2
+        : photoIndex + state > thumb.length - 1
         ? 0
         : photoIndex + state
     );
@@ -30,14 +38,14 @@ export const SingleLightbox = ({
     >
       <div className="flex justify-between items-center h-12 w-full px-10">
         <div className="text-white">
-          {photoIndex + 1}/{thumb?.length - 1}
+          {photoIndex + 1}/{thumb?.length}
         </div>
         <div
           className="w-10 h-10 flex justify-center items-center bg-black cursor-pointer"
           onClick={() => {
-            setPhotoIndex(0)
-            setIsOpen(false)
-        }}
+            setPhotoIndex(0);
+            setIsOpen(false);
+          }}
         >
           <CancelIcon className="w-6 h-6" fill="white" />
         </div>

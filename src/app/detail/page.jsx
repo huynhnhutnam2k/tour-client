@@ -1,11 +1,11 @@
-import { COMPONENT_KEYS } from "@/constants";
-import { headers as nextHeader } from "next/headers";
-import { generateMeta, getLocale } from "@/helpers/utils/server";
-import { MainLayout } from "@/layouts";
-import TourDetailModule from "@/modules/tour/detail";
-import { postApi, seoApi } from "@/services";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { headers as nextHeader } from "next/headers";
+
+import { MainLayout } from "@/layouts";
+import { postApi, seoApi } from "@/services";
+import { COMPONENT_KEYS } from "@/constants";
+import { generateMeta, getLocale } from "@/helpers/utils/server";
 
 export async function generateMetadata({ searchParams}) {
   const headers = nextHeader();

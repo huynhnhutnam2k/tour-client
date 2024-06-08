@@ -1,13 +1,54 @@
 "use client";
+import { useEffect, useState } from "react";
+
 import Top from "./Top";
 import SectionLeft from "./SectionLeft";
 import SectionRight from "./SectionRight";
 import ProductList from "@/components/product/ProductList";
-import { useState } from "react";
 import ModalFeedback from "@/components/modal/ModalFeedback";
+import { SingleLightbox } from "@/components/common/singleLightbox";
 
 export const TourDetailModule = ({ data }) => {
   const [isShowModalFeedback, setIsShowModalFeedback] = useState(false);
+  const [thumbs, setThumbs] = useState([]);
+  const [defaultImg, setDefaultImg] = useState();
+  const [isOpenLightbox, setIsOpenLightbox] = useState(false);
+  const [firstTime, setFirstTime] = useState(true);
+
+  useEffect(() => {
+    const element = document.getElementById("tour-left");
+    const listImg = [];
+    let imgs;
+    if (element) {
+      imgs = element.querySelectorAll("img");
+      imgs.forEach((img) => {
+        listImg.push(img.getAttribute("src"));
+      });
+    }
+    setThumbs(listImg);
+  }, []);
+
+  const handleClickImg = () => {
+    const element = document.getElementById("tour-left");
+    if (element) {
+      const imgs = element.querySelectorAll("img");
+      imgs.forEach((img) => {
+        img.addEventListener("click", () => {
+            if (firstTime) {
+                setDefaultImg(imgs[0].getAttribute("src"));
+                setFirstTime(false)
+            } else {
+                setDefaultImg(img.getAttribute("src"));    
+            }
+            setIsOpenLightbox(true);
+        });
+      });
+    }
+  };
+
+  useEffect(() => {
+    handleClickImg()
+  },[])
   return (
     <section className="tour-detail">
       <div className="container">
@@ -20,6 +61,7 @@ export const TourDetailModule = ({ data }) => {
             <SectionLeft
               data={data}
               setIsShowModalFeedback={setIsShowModalFeedback}
+              handleClickImg={handleClickImg}
             />
             <SectionRight isShowModalFeedback={isShowModalFeedback} />
           </div>
@@ -32,6 +74,13 @@ export const TourDetailModule = ({ data }) => {
       <ModalFeedback
         isOpen={isShowModalFeedback}
         handleClose={() => setIsShowModalFeedback(false)}
+      />
+
+      <SingleLightbox
+        defaultImg={defaultImg}
+        isOpen={isOpenLightbox}
+        thumb={thumbs}
+        setIsOpen={setIsOpenLightbox}
       />
     </section>
   );

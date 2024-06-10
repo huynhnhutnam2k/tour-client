@@ -64,7 +64,7 @@ const ProductList = ({ isFilter = false }) => {
           </div>
         ) : null}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {products?.map((product, index) => (
+          {products.map((product, index) => (
             <ProductItem product={product} isLoading={isLoading} key={index} />
           ))}
         </div>

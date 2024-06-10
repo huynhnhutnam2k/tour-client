@@ -13,7 +13,7 @@ const ThanksModules = () => {
   return (
     <>
       {isLoading ? (
-        <div className="flex flex-col items-center w-full max-w-[1170px] mx-auto">
+        <div className="flex flex-col items-center w-full lg:max-w-[1170px] mx-auto">
           <Skeleton width={480} height={480} />
           <Skeleton width={650} height={86} className="mb-10" />
           <Skeleton width={650} height={20} className="mb-14" />
@@ -21,7 +21,7 @@ const ThanksModules = () => {
         </div>
       ) : (
         <div className="flex flex-col items-center max-w-[1170px] mx-auto">
-          <div className="w-[480px] h-[480px]">
+          <div className="w-full sm:w-[480px] sm:h-[480px] overflow-hidden">
             <ImgCustom
               src={
                 thanksData?.data?.["thanks-page"]?.data?.field?.find(

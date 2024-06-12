@@ -107,7 +107,7 @@ const ProductItem = ({ product, isLoading }) => {
             )}
             {isLoading ? (
               <Skeleton className="mt-4" width="100%" height="22px" />
-            ) : (
+            ) : product?.meta?.length === 0 ? <div className="min-h-[22px] mt-4"></div> : (
               <div className="flex gap-x-4 items-center mt-4">
                 {product?.meta?.area ? (
                   <div className="flex items-center gap-x-1">

@@ -65,7 +65,7 @@ const SectionRight = ({ isShowModalFeedback }) => {
     <div className="w-full lg:w-3/12">
       {!isShowModalFeedback ? (
         <div
-          className="p-4 bg-gradient-form rounded-md lg:sticky lg:z-[1005]"
+          className="p-4 bg-gradient-form rounded-md lg:sticky lg:z-[1004]"
           style={{
             top,
           }}

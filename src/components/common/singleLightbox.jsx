@@ -32,7 +32,7 @@ export const SingleLightbox = ({ defaultImg, thumb, isOpen, setIsOpen }) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 bottom-0 right-0 bg-black/90 z-[2000] ${
+      className={`fixed top-0 left-0 bottom-0 right-0 bg-black/90 z-[3000] ${
         isOpen ? "w-screen block" : "w-0 hidden"
       } h-screen`}
     >

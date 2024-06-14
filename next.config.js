@@ -14,6 +14,14 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: "/sitemap.xml",
+        destination: "/sitemap",
+      },
+      {
+        source: "/sitemap/:id(\\d+).xml",
+        destination: "/sitemap/:id",
+      },
+      {
         source: "/:typeSlug/:tour",
         destination: "/detail",
       },

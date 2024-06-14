@@ -6,7 +6,7 @@ export const settingApi = {
         return axiosServer.get('/settings', {
             headers: {
                 Accept: 'application/json',
-                locale: locale
+                locale: locale || null
             }
         })
         

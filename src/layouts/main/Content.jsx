@@ -38,7 +38,7 @@ const Content = ({ categoriesRes, layoutWidget, children }) => {
         address={value?.data?.company_address || ""}
       />
       <FooterAction
-        hone={value?.data?.site_hotline}
+        phone={value?.data?.site_hotline}
         facebook={value?.data?.social_facebook || ""}
         zalo={value?.data?.social_zalo || ""}
         address={value?.data?.company_address || ""}

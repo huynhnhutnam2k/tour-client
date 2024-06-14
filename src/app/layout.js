@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import NextTopLoader from "nextjs-toploader";
 import { ToastContainer } from "react-toastify";
+import HttpsRedirect from "react-https-redirect";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -14,13 +15,15 @@ import { ReduxProvider } from "@/redux/provider";
 import { settingApi } from "@/services";
 import { getLocale } from "@/helpers/utils/server";
 
-export default async function RootLayout({ children }) {
+export default async function RootLayout({ Component, children }) {
   const locale = (await getLocale()) || { value: "vi" };
   const setting = await settingApi.getSetting(locale);
   const store = {
     locale,
     setting,
   };
+
+  const Layout = Component?.Layout || MainLayout
   return (
     <html lang="vi">
       <head>
@@ -38,23 +41,25 @@ export default async function RootLayout({ children }) {
       </head>
       <body>
         <NextTopLoader color="#2154a3" />
-        <ReduxProvider data={store}>
-          <MainLayout>
-            {children}
-            <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
-          </MainLayout>
-        </ReduxProvider>
+        <HttpsRedirect>
+          <ReduxProvider data={store}>
+            <Layout>
+              {children}
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+            </Layout>
+          </ReduxProvider>
+        </HttpsRedirect>
       </body>
     </html>
   );

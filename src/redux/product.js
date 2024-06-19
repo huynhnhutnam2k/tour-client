@@ -58,6 +58,12 @@ const productSlice = createSlice({
         categories: cate,
       };
     },
+    handleClearCategory: (state) => {
+        return {
+            ...state, 
+            categories: []
+        }
+    },
     setIsQuickView: (state, action) => {
         return {
             ...state, 
@@ -85,5 +91,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { handleToggleCategory, setIsQuickView } = productSlice.actions;
+export const { handleToggleCategory, handleClearCategory, setIsQuickView } = productSlice.actions;
 export default productSlice.reducer;

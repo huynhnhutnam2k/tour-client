@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { ImgCustom } from "../common/imgCustom";
 
 import { useDetectDevice } from "@/helpers/hooks";
-import { handleToggleCategory } from "@/redux/product";
+import { handleClearCategory, handleToggleCategory } from "@/redux/product";
 
 export const Header = ({ data }) => {
   const pathname = usePathname();
@@ -48,6 +48,13 @@ export const Header = ({ data }) => {
       window.removeEventListener("scroll", isSticky);
     };
   }, [width]);
+
+  useEffect(() => {
+    if (pathname === '/') {
+        dispatch(handleClearCategory())
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[pathname])
 
   const handleClick = (id) => {
     dispatch(handleToggleCategory(id));

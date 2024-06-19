@@ -20,11 +20,11 @@ export async function middleware(request) {
   const url = new URL(request.url);
   const host = request.headers.get("host") || url.host;
 
-  if (url.protocol !== 'https') {
-    const newUrl = `https://${host}${url.pathname}${url.search}`;
+//   if (url.protocol !== 'https') {
+//     const newUrl = `https://${host}${url.pathname}${url.search}`;
 
-    return NextResponse.redirect(newUrl, 302);
-  }
+//     return NextResponse.redirect(newUrl, 302);
+//   }
 
   const redirect = await redirectApi.server.getRedirectByUrl(url.pathname);
   if (redirect) {
